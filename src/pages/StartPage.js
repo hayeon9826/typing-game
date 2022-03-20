@@ -129,6 +129,7 @@ export default function StartPage({ $target }) {
         }
       } else {
         // 단어가 맞지 않다면 에러 박스 보이기
+        document.querySelector(".start-input").value = "";
         $error.style.display = "block";
       }
     }

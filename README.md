@@ -7,6 +7,7 @@
 
 - Vanilla javascript
 - Webpack, webpack-dev-server
+- jest
 
 ## 로컬 실행
 

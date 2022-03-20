@@ -15,9 +15,9 @@ export default function CompletePage({ $target }) {
   $button.className = "restart-button";
   $message.className = "final-message";
   $button.innerHTML = "다시 시작";
-  $message.innerHTML = `<h2>Mission Complete!</h2>
-  <h1>당신의 점수는 ${score}점 입니다.</h1>
-  <b>단어당 평균 답변 시간은 ${(
+  $message.innerHTML = `<h2 class="title">Mission Complete!</h2>
+  <h1 class="final-score">당신의 점수는 ${score}점 입니다.</h1>
+  <b class="final-time">단어당 평균 답변 시간은 ${(
     parseFloat(totalTime) / parseFloat(score)
   ).toFixed(2)}초 입니다.</b>`;
 
