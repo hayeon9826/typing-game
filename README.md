@@ -26,6 +26,7 @@
 4. input에 단어 입력 시 체크
 5. 게임 완료 시 완료 페이지로 라우팅
 6. 완료 페이지에서 점수 및 걸린 평균 시간 표시, 다시 시작 버튼 추가
+7. 그 외: 첫 화면 진입 시 인풋 disable, 단어 틀리면 에러 메세지 출력
 
 ## 파일별 설명
 
@@ -38,11 +39,32 @@
 - `pages/StartPage`: 게임 시작 및 게임 페이지
 - `pages/CompletePage`: 게임 완료 페이지
 
+### src/utils
+
+- `utils/api`: 단어 가져오는 api, url에서 쿼리 추출 함수 구현
+- `utils/router`: `history.pushState`으로 라우팅 구현
+
 ### public
 
 - 빌드한 html, js, css 파일
 
 ## 해결 전략
+
+### 1. Webpack 환경 구성
+
+### 2. 라우팅 설정
+
+### 3. 단위 테스트 적용
+
+### 4. 단어 가져오기
+
+### 5. 게임 시작 / 게임 화면 구현
+
+### 6. 완료 화면 구현
+
+### 동작 gif
+
+![typing-game gif](https://user-images.githubusercontent.com/72732446/159172495-808c141e-f581-4c35-806b-b527b4703b50.gif)
 
 ### 사진 첨부
 
