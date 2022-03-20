@@ -1,0 +1,85 @@
+.App {
+  max-width: 500px;
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 100px;
+}
+
+.start-button {
+  width: 25%;
+  margin-top: 32px;
+  background-color: #0aa2ff;
+  color: #fff;
+  font-size: 1.2rem;
+  border: 1px solid #40a9ff;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.flex-div {
+  display: flex;
+  justify-content: space-between;
+  width: 50%;
+  margin: 0 auto;
+  padding-bottom: 10px;
+}
+
+.start-input {
+  display: block;
+  margin: 0 auto;
+  border-radius: 10px;
+  background-color: #0aa2ff;
+  border: none;
+  height: 40px;
+  color: white;
+  width: 50%;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.start-input::placeholder {
+  color: white;
+}
+
+.restart-button {
+  width: 50%;
+  margin-top: 32px;
+  background-color: #0aa2ff;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 10px;
+  border: none;
+}
+
+.error-box {
+  color: rgb(255, 85, 85);
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.notice-box {
+  color: #265eff;
+  font-size: 12px;
+  margin-top: 10px;
+}
+
+.final-message {
+  line-height: 40px;
+}
+
+.start-page {
+  margin-top: 36px;
+}
+
+.disable {
+  background-color: #7e7e7e;
+  border: none;
+  cursor: pointer;
+}
+
+.disable-input {
+  background-color: #c7c7c7;
+  border: none;
+  cursor: not-allowed;
+}
