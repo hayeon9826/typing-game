@@ -1,5 +1,6 @@
-var path = require("path");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   mode: "none",
@@ -17,15 +18,21 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
     ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
-      // index.html 템플릿을 기반으로 빌드 결과물을 추가해줌
+      // index.html 템플릿을 기반으로 빌드 결과물을 추가
+      hash: true,
       template: "index.html",
+      filename: "index.html",
+    }),
+    new MiniCssExtractPlugin({
+      filename: "style.css",
+      ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
   ],
 };
