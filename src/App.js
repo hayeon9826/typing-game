@@ -7,6 +7,7 @@ export default function App({ $target }) {
     const { pathname } = window.location;
     $target.innerHTML = "";
 
+    // pathname을 통해서 화면 routing
     if (pathname === "/") {
       new StartPage({ $target }).render();
     } else if (pathname === "/complete") {
