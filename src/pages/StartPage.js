@@ -153,7 +153,7 @@ export default function StartPage({ $target }) {
     this.timerId = setInterval(() => {
       // setInterval 함수를 변수에 담아 사용.
       // 0초 이상일 때 1초씩 감소. 변화한 time 값을 화면에 노출
-      if (time > 0) {
+      if (time > 1) {
         time--;
         document.querySelector(".current_count").innerHTML = time;
       } else {
