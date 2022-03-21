@@ -8,7 +8,7 @@ module.exports = {
   transform: {
     "^.+\\.(js)?$": "babel-jest",
   },
-  testEnvironment: "node",
+  testEnvironment: "jsdom",
   moduleNameMapper: {
     "^@/(.*)$": "<rootDir>/$1",
   },
@@ -16,5 +16,6 @@ module.exports = {
     "<rootDir>/**/*.test.(js)",
     "<rootDir>/(tests/unit/**/*.spec.(js)|**/__tests__/*.(js))",
   ],
+  setupFilesAfterEnv: ["./test/setUpFile.js"],
   transformIgnorePatterns: ["<rootDir>/node_modules/"],
 };

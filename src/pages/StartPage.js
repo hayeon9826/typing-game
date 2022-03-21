@@ -124,7 +124,7 @@ export default function StartPage({ $target }) {
           // 단어 순서, 점수, 남은 시간, input창 업데이트 시키고, nextGame 호출
           count = count + 1;
           time = words[count].second;
-          document.querySelector(".start-input").value === "";
+          document.querySelector(".start-input").value = "";
           nextGame();
         }
       } else {
