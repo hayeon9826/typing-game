@@ -11,12 +11,30 @@
 
 ## 로컬 실행
 
-클론 후, 아래 명령어 입력. `localhost:9000` 접속
+- 클론 후, 아래 명령어 입력. `localhost:9000` 접속
 
 ```
   npm i
   npm run build
   npm run start
+```
+
+- 빌드 실행. 빌드 시 export 된 html, css, js 파일이 public 폴더에 생성됨
+
+```
+npm run build
+```
+
+- webpack-dev-server 실행. 로컬 서버 (localhost:9000)에서 실행된 화면 확인
+
+```
+npm run start
+```
+
+- Jest로 단위 테스트 실행. (게임 페이지, 게임 완료 페이지, util 함수)
+
+```
+npm run test
 ```
 
 ## 구현된 기능
@@ -28,6 +46,7 @@
 5. 게임 완료 시 완료 페이지로 라우팅
 6. 완료 페이지에서 점수 및 걸린 평균 시간 표시, 다시 시작 버튼 추가
 7. 그 외: 첫 화면 진입 시 인풋 disable, 단어 틀리면 에러 메세지 출력
+8. Jest로 테스트 코드 작성
 
 ## 파일별 설명
 
@@ -53,15 +72,49 @@
 
 ### 1. Webpack 환경 구성
 
+- webpack-dev-server 환경 구성
+- `npm run build`, `npm run start`, `npm run test`로 원하는 작업 수행
+- start script에 hot reload 적용
+- build script로 public 폴더에 js, css 파일 export
+
 ### 2. 라우팅 설정
+
+- vanilla js로 라우팅 구현
+- javascript의 history api로 라우팅 상태 관리
+- `popstate`로 뒤로가기/앞으로 가기 구현
+- 버튼 클릭 시 `pushstate`로 페이지 이동
 
 ### 3. 단위 테스트 적용
 
+- Jest 사용
+- 크게 게임 화면, 게임 완료 화면, 유틸 함수 세 가지 테스트
+
 ### 4. 단어 가져오기
+
+- async, await 함수로 주어진 api_url fetch
+- 만약 fetch의 응답이 ok면, 응답을 json으로 파싱해서 전달.
 
 ### 5. 게임 시작 / 게임 화면 구현
 
+#### 게임 시작 전
+
+- 게임 시작 전 세팅:
+- 게임 시작 함수 호출:
+
+#### 게임 시작 후
+
+- 타이머:
+- 인풋창에 올바른 값을 넣고 Enter:
+- 인풋창에 틀린 값을 넣고 Enter:
+- 시간이 다 떨어졌을 때:
+- 모든 단어를 다 맞췄을 때:
+- 초기화 버튼:
+
 ### 6. 완료 화면 구현
+
+- routing에 query params로 점수 및 시간을 받음
+- 받은 점수와 시간을 화면에 나타냄
+- 다시 시작하기 버튼 클릭 시 메인페이지로 routing됨
 
 ### 동작 gif
 
