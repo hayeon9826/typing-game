@@ -120,7 +120,7 @@ npm run test
 
 ![typing-game gif](https://user-images.githubusercontent.com/72732446/159172495-808c141e-f581-4c35-806b-b527b4703b50.gif)
 
-### 사진 첨부
+### 화면 사진 첨부
 
 ![typing-game init](https://user-images.githubusercontent.com/72732446/159170602-b9887a33-6357-44d4-ac2e-dcd1ff829498.png)
 
@@ -133,3 +133,7 @@ npm run test
 ![typing-game last](https://user-images.githubusercontent.com/72732446/159170671-ae0bb78b-3780-4f37-a9b7-84a28184e211.png)
 
 ![typing-game complete](https://user-images.githubusercontent.com/72732446/159170677-ee5956ca-65fa-4119-b310-46859e7baef7.png)
+
+### test 사진 첨부
+
+![jest test](https://user-images.githubusercontent.com/72732446/159337197-c2a1ce4a-0a35-4c48-8226-4298d0ee81c9.png)
