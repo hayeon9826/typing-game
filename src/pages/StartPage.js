@@ -76,22 +76,29 @@ export default function StartPage({ $target }) {
 
   // 게임 시작했을 때
   const startGame = () => {
+    // 변수 세팅
     words = words;
     score = words.length;
     time = words[count].second;
+    // 타이머 시작
     timer();
+    // html 속성 변경 (active)
     $input.disabled = false;
     $input.classList.remove("disable-input");
     $notice.style.display = "none";
+    // 화면에 현재 단어 및 스코어 표시
     document.querySelector(".current-word").innerHTML = words[count].text;
     document.querySelector(".current-score").innerHTML = score;
   };
 
   // 단어 성공 시, 다음 단어 준비
   const nextGame = async () => {
+    // 다음 단어로 준비
     time = words[count].second;
+    // 기존 타이머 삭제 후 현재 시간으로 다시 시작
     this.timerId && clearTimeout(this.timerId);
     await timer();
+    // input 초기화 후, 현재 단어 및 스코어로 업데이트
     document.querySelector(".start-input").value = "";
     document.querySelector(".current-word").innerHTML = words[count].text;
     document.querySelector(".current-score").innerHTML = score;
@@ -99,10 +106,13 @@ export default function StartPage({ $target }) {
 
   // '시작' 버튼 눌렀을 때
   const setStart = () => {
+    // start 상태 반대로 변경
     start = !start;
+    // 만약 시작이면 게임 시작.
     if (start) {
       startGame();
     } else {
+      // 아니라면 초기화
       reset();
     }
   };

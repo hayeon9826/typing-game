@@ -31,6 +31,7 @@ function App({ $target }) {
 
   (0,_utils_router_js__WEBPACK_IMPORTED_MODULE_2__.init)(this.route);
   this.route();
+  window.addEventListener("popstate", this.route);
 }
 
 
@@ -104,12 +105,11 @@ function StartPage({ $target }) {
     // 변수 초기화
     count = 0;
     totalTime = 0;
-    score = 0;
+    score = words.length;
     start = false;
     time = 0;
     // timer 초기화
     this.timerId && clearTimeout(this.timerId);
-    this.totalTimerId && clearTimeout(this.totalTimerId);
     // css 초기화
     $notice.style.display = "block";
     $input.disabled = true;
@@ -124,17 +124,19 @@ function StartPage({ $target }) {
   // 게임 시작했을 때
   const startGame = () => {
     words = words;
+    score = words.length;
     time = words[count].second;
     timer();
-    totalTimer();
     $input.disabled = false;
     $input.classList.remove("disable-input");
     $notice.style.display = "none";
     document.querySelector(".current-word").innerHTML = words[count].text;
+    document.querySelector(".current-score").innerHTML = score;
   };
 
   // 단어 성공 시, 다음 단어 준비
   const nextGame = async () => {
+    time = words[count].second;
     this.timerId && clearTimeout(this.timerId);
     await timer();
     document.querySelector(".start-input").value = "";
@@ -159,22 +161,22 @@ function StartPage({ $target }) {
       if (document.querySelector(".start-input").value === words[count].text) {
         // 에러 박스 없애기
         $error.style.display = "none";
+        // 단어를 맞추면 사용한 시간 total time에 추가
+        totalTime = totalTime + (words[count].second - time);
         // 마지막 단어일 때, 타이버 초기화 및 complete 페이지로 라우팅
         if (words.length === count + 1) {
-          score = score + 1;
-          this.totalTimerId && clearTimeout(this.totalTimerId);
           this.timerId && clearTimeout(this.timerId);
           (0,_utils_router__WEBPACK_IMPORTED_MODULE_1__.routeChange)("/complete", `?score=${score}&total=${totalTime}`);
         } else {
           // 단어 순서, 점수, 남은 시간, input창 업데이트 시키고, nextGame 호출
           count = count + 1;
-          score = score + 1;
           time = words[count].second;
-          document.querySelector(".start-input").value === "";
+          document.querySelector(".start-input").value = "";
           nextGame();
         }
       } else {
         // 단어가 맞지 않다면 에러 박스 보이기
+        document.querySelector(".start-input").value = "";
         $error.style.display = "block";
       }
     }
@@ -199,23 +201,16 @@ function StartPage({ $target }) {
     this.timerId = setInterval(() => {
       // setInterval 함수를 변수에 담아 사용.
       // 0초 이상일 때 1초씩 감소. 변화한 time 값을 화면에 노출
-      if (time > 0) {
+      if (time > 1) {
         time--;
         document.querySelector(".current_count").innerHTML = time;
       } else {
-        // 만약 남은 시간이 없다면 totalTimer, timer 모두 리셋시키고, complete 페이지로 라우팅
-        this.totalTimerId && clearTimeout(this.totalTimerId);
+        // 만약 남은 시간이 없다면 timer 리셋시키고, 점수 차감. 다음 단어 진행
         this.timerId && clearTimeout(this.timerId);
-        (0,_utils_router__WEBPACK_IMPORTED_MODULE_1__.routeChange)("/complete", `?score=${score}&total=${totalTime}`);
+        score = score - 1;
+        count = count + 1;
+        nextGame();
       }
-    }, 1000);
-  };
-
-  // 총 걸린 시간 타이머
-  const totalTimer = () => {
-    this.totalTimerId = setInterval(() => {
-      // setInterval 함수를 변수에 담아 사용
-      totalTime++;
     }, 1000);
   };
 
@@ -242,7 +237,9 @@ function StartPage({ $target }) {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "API_URL": () => (/* binding */ API_URL),
 /* harmony export */   "getQuery": () => (/* binding */ getQuery),
+/* harmony export */   "getQueryTest": () => (/* binding */ getQueryTest),
 /* harmony export */   "request": () => (/* binding */ request)
 /* harmony export */ });
 const API_URL =
@@ -265,6 +262,13 @@ const request = async () => {
 // 쿼리 가져오는 함수
 const getQuery = (name) => {
   const queryString = new URLSearchParams(location.search);
+  return queryString.get(name);
+};
+
+// 쿼리 가져오는 함수 test
+const getQueryTest = (name, urlString = "") => {
+  const url = new URL(urlString);
+  const queryString = new URLSearchParams(url.search);
   return queryString.get(name);
 };
 
@@ -319,9 +323,9 @@ function CompletePage({ $target }) {
   $button.className = "restart-button";
   $message.className = "final-message";
   $button.innerHTML = "다시 시작";
-  $message.innerHTML = `<h2>Mission Complete!</h2>
-  <h1>당신의 점수는 ${score}점 입니다.</h1>
-  <b>단어당 평균 답변 시간은 ${(
+  $message.innerHTML = `<h2 class="title">Mission Complete!</h2>
+  <h1 class="final-score">당신의 점수는 ${score}점 입니다.</h1>
+  <b class="final-time">단어당 평균 답변 시간은 ${(
     parseFloat(totalTime) / parseFloat(score)
   ).toFixed(2)}초 입니다.</b>`;
 
