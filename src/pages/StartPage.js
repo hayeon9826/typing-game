@@ -93,15 +93,22 @@ export default function StartPage({ $target }) {
 
   // 단어 성공 시, 다음 단어 준비
   const nextGame = async () => {
-    // 다음 단어로 준비
-    time = words[count].second;
-    // 기존 타이머 삭제 후 현재 시간으로 다시 시작
-    this.timerId && clearTimeout(this.timerId);
-    await timer();
-    // input 초기화 후, 현재 단어 및 스코어로 업데이트
-    document.querySelector(".start-input").value = "";
-    document.querySelector(".current-word").innerHTML = words[count].text;
-    document.querySelector(".current-score").innerHTML = score;
+    // 만약 마지막 스테이지라면 완료 페이지로 이동
+    // timer에서 시간 만료 시 count + 1를 하기 때문에 단어 길이와 count를 비교
+    if (words.length === count) {
+      this.timerId && clearTimeout(this.timerId);
+      routeChange("/complete", `?score=${score}&total=${totalTime}`);
+    } else {
+      // 다음 stage 단어로 준비
+      time = words[count].second;
+      // 기존 타이머 삭제 후 현재 시간으로 다시 시작
+      this.timerId && clearTimeout(this.timerId);
+      await timer();
+      // input 초기화 후, 현재 단어 및 스코어로 업데이트
+      document.querySelector(".start-input").value = "";
+      document.querySelector(".current-word").innerHTML = words[count].text;
+      document.querySelector(".current-score").innerHTML = score;
+    }
   };
 
   // '시작' 버튼 눌렀을 때
@@ -126,7 +133,7 @@ export default function StartPage({ $target }) {
         $error.style.display = "none";
         // 단어를 맞추면 사용한 시간 total time에 추가
         totalTime = totalTime + (words[count].second - time);
-        // 마지막 단어일 때, 타이버 초기화 및 complete 페이지로 라우팅
+        // 마지막 단어일 때, 타이머 초기화 및 complete 페이지로 라우팅
         if (words.length === count + 1) {
           this.timerId && clearTimeout(this.timerId);
           routeChange("/complete", `?score=${score}&total=${totalTime}`);
