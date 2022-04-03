@@ -56,34 +56,6 @@ npm run test
 
 ---
 
-## 파일별 설명
-
-### src/App.js
-
-- `src/App.js`: 메인 페이지. 라우팅으로 게임 시작/ 완료 페이지 구분
-
-### src/pages
-
-- `pages/StartPage`: 게임 시작 및 게임 페이지
-- `pages/CompletePage`: 게임 완료 페이지
-
-### src/utils
-
-- `utils/api`: 단어 가져오는 api, url에서 쿼리 추출 함수 구현
-- `utils/router`: `history.pushState`으로 라우팅 구현
-
-### public
-
-- 빌드한 html, js, css 파일
-
-### test/
-
-- `test/pages/StartPage.test`: 게임 시작 페이지 테스트 (Jest)
-- `test/pages/CompletePage.test`: 게임 완료 페이지 테스트 (Jest)
-- `test/utils/api.test`: 쿼리 함수 호출 테스트 (Jest)
-
----
-
 ## 해결 전략
 
 ### 1. Webpack 환경 구성
@@ -119,19 +91,25 @@ npm run test
 - #### 게임 시작 전:
 
   - 1. `fetch API`를 이용해 단어 목록 비동기 호출 (async, await)
+    - `https://my-json-server.typicode.com/kakaopay-fe/resources/words` GET 요청
+    - 가져온 단어 목록 json 으로 리턴
   - 2. 변수 선언 및 html DOM 생성
-  - 3. 점수는 단어 총 갯수로, 시간은 0분으로 초기화시킴. input 창은 disable 시키고 '게임 시작' 문구를 추가. '시작' 버튼은 active된 상태로 세팅
+  - 3. 점수는 단어 총 갯수로, 시간은 첫번째 단어 남은 시간으로 초기화시킴. input 창은 disable 시키고 '시작' 버튼은 active된 상태로 세팅
   - 4. 렌더링 함수 호출 시, Html element를 페이지에 append 시키고, 인풋 상자에 keydown 이벤트 추가. '시작' 버튼에는 click 이벤트 추가
 
 - #### 게임 시작 & 완료:
   - 1. '시작' 버튼 클릭 시 start(게임 시작 여부) 상태를 true로 변경하고 해당 횟수 (count)에 맞는 단어/시간/총 점수를 화면에 보여줌. 그리고 해당 시간 기준으로 timer를 시작함
-    - 만약 게임 도중에 '초기화' 버튼을 누르면 reset 함수 호출. 변수, css, html element 초기화 및 timer 초기화
+    - 만약 게임 도중에 '초기화' 버튼을 누르면 reset 함수 호출.
+    - 변수, css, html element 초기화 및 timer 초기화
   - 2. timer함수는 호출 스케쥴링을 사용 (setInterval, setTimeout).
   - 3. 시간이 만료되면 다음 게임으로 이동하고(nextGame) 점수(score)를 감점 시킴. 기존 타이머는 삭제하고 새로운 타이머 시작. 해당 스테이지의 시간은 total time에 추가하지 않는다.
   - 4. 시간 만료되기 전 올바른 단어를 입력하면,
-    - 렌더링시에 등록한 input의 keyup 이벤트에 의해 'Enter'를 친 경우 input 창의 단어와, 현재 단어를 비교. 만약 답이 맞다면 score를 유지한 채 단어 맞춘 시간을 total time에 추가. 그리고 다음 게임 호출(nextGame)
+    - 렌더링시에 등록한 input의 keyup 이벤트에 의해 'Enter'를 친 경우 input 창의 단어와, 현재 단어를 비교.
+    - 만약 답이 맞다면 score를 유지한 채 단어 맞춘 시간을 total time에 추가. 그리고 다음 게임 호출(nextGame)
   - 5. 시간 만료되기 전 틀린 단어를 입력하면 input창 클리어
-  - 6. 만약 모든 단어를 입력했다면, handleInput 함수에서 현재 스테이지와 총 단어 갯수를 비교한 후 '게임 완료' 페이지로 라우팅. 기존 타이머는 삭제. 라우팅을 할 때, 총 점수(score)와 문제 푸는데 걸린 총 시간(totalTime)을 같이 전달함
+  - 6. 만약 모든 단어를 입력했다면, handleInput 함수에서 현재 스테이지와 총 단어 갯수를 비교한 후 '게임 완료' 페이지로 라우팅.
+    - 기존 타이머는 삭제. 라우팅을 할 때, query params로 총 점수(score)와 문제 푸는데 걸린 총 시간(totalTime)을 같이 전달
+    - 예) `routeChange("/complete", '?score=10&total=12')`
 
 ### 6. 완료 화면 구현
 
@@ -139,6 +117,34 @@ npm run test
   - utils/api에서 `getQuery`함수를 사용해 원하는 params의 값 추출 (점수, 총 시간)
 - 받은 점수와 평균 시간(총 시간 / 점수)을 화면에 나타냄
 - 다시 시작하기 버튼 클릭 시 메인페이지로 routing 됨
+
+---
+
+## 파일별 설명
+
+### src/App.js
+
+- `src/App.js`: 메인 페이지. 라우팅으로 게임 시작/ 완료 페이지 구분
+
+### src/pages
+
+- `pages/StartPage`: 게임 시작 및 게임 페이지
+- `pages/CompletePage`: 게임 완료 페이지
+
+### src/utils
+
+- `utils/api`: 단어 가져오는 api, url에서 쿼리 추출 함수 구현
+- `utils/router`: `history.pushState`으로 라우팅 구현
+
+### public
+
+- 빌드한 html, js, css 파일
+
+### test/
+
+- `test/pages/StartPage.test`: 게임 시작 페이지 테스트 (Jest)
+- `test/pages/CompletePage.test`: 게임 완료 페이지 테스트 (Jest)
+- `test/utils/api.test`: 쿼리 함수 호출 테스트 (Jest)
 
 ---
 
