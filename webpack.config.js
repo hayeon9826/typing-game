@@ -6,13 +6,13 @@ module.exports = {
   mode: "none",
   entry: "./index.js",
   output: {
-    filename: "bundle.js",
     path: path.resolve(__dirname, "public"),
-    // publicPath: "/",
+    filename: "[name].js",
   },
+  // webpack-dev-server, hot-loading 설정
   devServer: {
-    port: 9000,
-    host: "localhost",
+    hot: true,
+    port: 8080,
   },
   module: {
     rules: [

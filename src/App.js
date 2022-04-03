@@ -4,7 +4,6 @@ import { init } from "./utils/router.js";
 
 export default function App({ $target }) {
   this.route = () => {
-    // 윈도우 location 속성으로 현재 페이지 url 가져오기
     const { pathname } = window.location;
     $target.innerHTML = "";
 
