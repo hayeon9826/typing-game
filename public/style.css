@@ -1,6 +1,25 @@
+@font-face {
+  font-family: "notokr";
+  src: url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.eot");
+  src: url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.eot?#iefix")
+      format("embedded-opentype"),
+    url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.woff2")
+      format("woff2"),
+    url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.woff")
+      format("woff"),
+    url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.ttf")
+      format("truetype"),
+    url("//db.onlinewebfonts.com/t/3a8ef215f4437b176fe0901f44ffbab0.svg#NotoKR-Regular")
+      format("svg");
+}
+
 body {
   height: 100vh;
   /* background: #000000; */
+  font-display: swap;
+  font-family: "notokr", "맑은고딕", "Malgun Gothic", malgun, "돋움", Dotum,
+    "굴림", Gulim, "AppleSDGothicNeo-Light", AppleGothic, Helvetica, Arial,
+    "HelveticaNeue-Light", "sans-serif-light", sans-serif;
   margin: 0px !important;
 }
 
@@ -18,7 +37,7 @@ body {
 .logo_div {
   position: fixed;
   right: 20px;
-  bottom: 10px;
+  bottom: 20px;
 }
 
 .logo_div img {
@@ -30,10 +49,10 @@ body {
 .App {
   background: #1f2327;
   max-width: 500px;
-  margin: 0 auto;
+  margin: 18px auto;
   text-align: center;
   padding-top: 10rem;
-  height: 100vh;
+  height: 80%;
   border-radius: 20px;
 }
 
@@ -103,10 +122,11 @@ b {
 }
 
 .final-message {
-  line-height: 40px;
+  line-height: 50px;
 }
 
 .start-page {
+  line-height: 50px;
   margin-top: 36px;
 }
 

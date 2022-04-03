@@ -3,9 +3,11 @@ import { routeChange } from "../../src/utils/router";
 const score = 12;
 const time = 12;
 
-const defaultHTML = `<h2 class="title">Mission Complete!</h2><h1 class="final-score">당신의 점수는 ${score}점 입니다.</h1><b class="final-time">단어당 평균 답변 시간은 ${(
-  parseFloat(time) / parseFloat(score)
-).toFixed(2)}초 입니다.</b>`;
+const defaultHTML = `<h2 class="title">Mission Complete!</h2>
+  <h1 class="final-score">당신의 점수는 ${score}점 입니다.</h1>
+  <b class="final-time">단어당 평균 답변 시간은 ${(
+    parseFloat(time) / parseFloat(score)
+  ).toFixed(2)}초 입니다.</b>`;
 
 describe("게임 완료 페이지 테스트", () => {
   beforeEach(() => {

@@ -16,14 +16,29 @@ const data = [
 ];
 let $button;
 let $input;
-let $notice;
 let $current;
 let start = false;
 let words = data;
 let score = data.length;
 let time = 0;
 let count = 0;
-const defaultHTML = `<main class="App"><div class="start-page"><div class="flex-div"><div><b>남은 시간: <span class="current_count">${time}</span>초</b></div><div><b>점수: <span class="current-score">${data.length}</span>점</b></div></div><div class="word-div"><h1 class="current-word"></h1></div><input class="start-input disable-input" placeholder="입력" disabled=""><div class="notice-box" style="display: block;">[시작] 버튼을 눌러 게임을 시작해주세요.</div><div class="error-box" style="display: none;">틀렸습니다. 다시 입력해주세요.</div><button class="start-button">시작</button></div></main>`;
+const defaultHTML = `<main class="App">
+  <div class="start-page"
+    <div class="flex-div">
+      <div>
+        <b>남은 시간: <span class="current_count">${time}</span>초</b>
+      </div>
+      <div>
+        <b>점수: <span class="current-score">${data.length}</span>점</b>
+      </div>
+    </div>
+    <div class="word-div">
+      <h1 class="current-word"></h1>
+    </div>
+    <input class="start-input disable-input" placeholder="입력" disabled="">
+    <button class="start-button">시작</button>
+  </div>
+</main>`;
 
 // '시작' 버튼 눌렀을 때
 const setStart = () => {
@@ -44,7 +59,6 @@ const reset = () => {
   time = 0;
   // timer 초기화
   // css 초기화
-  $notice.style.display = "block";
   $input.disabled = true;
   $input.classList.add("disable-input");
   // element 초기화
@@ -60,7 +74,6 @@ const startGame = () => {
   time = words[count].second;
   $input.disabled = false;
   $input.classList.remove("disable-input");
-  $notice.style.display = "none";
   document.querySelector(".current-word").innerHTML = words[count].text;
   document.querySelector(".current-score").innerHTML = score;
   document.querySelector(".current_count").innerHTML = words[count].second;
@@ -135,7 +148,6 @@ describe("게임 페이지 테스트", () => {
     $button = document.querySelector(".start-button");
     $input = document.querySelector(".start-input");
     $current = document.querySelector(".current-word");
-    $notice = document.querySelector(".notice-box");
     $button.addEventListener("click", handleClick);
     $input.addEventListener("keydown", handleInput);
     reset();
@@ -159,12 +171,6 @@ describe("게임 페이지 테스트", () => {
 
   test("시작 페이지에서는 input 필드 입력 비활성화", () => {
     expect(document.querySelector(".start-input").disabled).toEqual(true);
-  });
-
-  test("초기 시작 메세지 출력 여부", () => {
-    expect(document.querySelector(".notice-box").innerHTML).toBe(
-      "[시작] 버튼을 눌러 게임을 시작해주세요."
-    );
   });
 
   test("시작 버튼을 누르면 게임이 시작된다. (버튼 비활성화, 인풋 활성화)", () => {
@@ -249,9 +255,6 @@ describe("게임 페이지 테스트", () => {
       "disable-input"
     );
     expect(document.querySelector(".start-input").disabled).toEqual(true);
-    expect(document.querySelector(".notice-box").innerHTML).toBe(
-      "[시작] 버튼을 눌러 게임을 시작해주세요."
-    );
   });
 
   test("모든 단어를 입력하면 결과 화면으로 이동한다.", () => {
