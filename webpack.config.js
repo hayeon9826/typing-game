@@ -1,13 +1,13 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
-  mode: "none",
-  entry: "./index.js",
+  mode: 'none',
+  entry: './index.js',
   output: {
-    path: path.resolve(__dirname, "public"),
-    filename: "[name].js",
+    path: path.resolve(__dirname, 'public'),
+    filename: '[name].js',
   },
   // webpack-dev-server, hot-loading 설정
   devServer: {
@@ -18,7 +18,7 @@ module.exports = {
     rules: [
       {
         test: /\.css$/,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
@@ -27,11 +27,11 @@ module.exports = {
     new HtmlWebpackPlugin({
       // index.html 템플릿을 기반으로 빌드 결과물을 추가
       hash: true,
-      template: "index.html",
-      filename: "index.html",
+      template: 'index.html',
+      filename: 'index.html',
     }),
     new MiniCssExtractPlugin({
-      filename: "style.css",
+      filename: 'style.css',
       ignoreOrder: false, // Enable to remove warnings about conflicting order
     }),
   ],
