@@ -99,7 +99,7 @@ npm run test
 - javascript의 history api로 라우팅 상태 관리
 - 페이지 이동 버튼 클릭 시 `pushstate`로 URL 업데이트. URL은 이동하려는 다음 Url과 query를 함께 받음
 - `location.pathname`을 이용해 URL 별로 페이지 분기
-- 뒤로가기, 앞으로 가기 눌렀을 때) `popstate` 이벤트 발생하도록 적용
+- 뒤로가기, 앞으로 가기 눌렀을 때 `popstate` 이벤트 발생하도록 적용
 
 ### 3. 단위 테스트 적용
 
@@ -118,10 +118,10 @@ npm run test
 
 - #### 게임 시작 전:
 
-  - 0. `fetch API`를 이용해 단어 목록 비동기 호출 (async, await)
-  - 1. 변수 선언 및 html DOM 생성
-  - 2. 점수는 단어 총 갯수로, 시간은 0분으로 초기화시킴. input 창은 disable 시키고 '게임 시작' 문구를 추가. '시작' 버튼은 active된 상태로 세팅
-  - 3. 렌더링 함수 호출 시, Html element를 페이지에 append 시키고, 인풋 상자에 keydown 이벤트 추가. '시작' 버튼에는 click 이벤트 추가
+  - 1. `fetch API`를 이용해 단어 목록 비동기 호출 (async, await)
+  - 2. 변수 선언 및 html DOM 생성
+  - 3. 점수는 단어 총 갯수로, 시간은 0분으로 초기화시킴. input 창은 disable 시키고 '게임 시작' 문구를 추가. '시작' 버튼은 active된 상태로 세팅
+  - 4. 렌더링 함수 호출 시, Html element를 페이지에 append 시키고, 인풋 상자에 keydown 이벤트 추가. '시작' 버튼에는 click 이벤트 추가
 
 - #### 게임 시작 & 완료:
   - 1. '시작' 버튼 클릭 시 start(게임 시작 여부) 상태를 true로 변경하고 해당 횟수 (count)에 맞는 단어/시간/총 점수를 화면에 보여줌. 그리고 해당 시간 기준으로 timer를 시작함
